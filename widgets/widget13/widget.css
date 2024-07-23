@@ -1,0 +1,82 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-soc-seti {
+    width: 418px;
+    height: 131px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+}
+
+#close-widget {
+    width: 6.42px;
+    height: 6.42px;
+    position: absolute;
+    top: 10.7px;
+    left: 401px;
+    cursor: pointer;
+}
+
+#group-section {
+    width: 347.1px;
+    height: 92.97px;
+    position: absolute;
+    top: 19px;
+    left: 30.9px;
+}
+
+#zagolovok {
+    width: 347px;
+    height: 46px;
+    position: absolute;
+    left: 0.1px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 18.71px;
+    line-height: 22.65px;
+    color: #000;
+}
+
+#image-section {
+    width: 177.1px;
+    height: 35.97px;
+    position: absolute;
+    top: 57px;
+    display: flex;
+    gap: 32.56px;
+}
+
+#image-section a img{
+    width: 35.97px;
+    height: 35.97px;
+}
+
+@keyframes animation {
+    from {
+        bottom: -500px
+    }
+
+    to {
+        bottom: 50px
+    }
+}
+
+.widget {
+    animation: 2s animation;
+}

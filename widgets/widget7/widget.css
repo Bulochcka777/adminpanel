@@ -1,0 +1,113 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-obr-zvon {
+    width: 309.58px;
+    height: 317px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+    position: absolute;
+    right: 41.42px;
+    bottom: 50px;
+}
+
+#close-widget {
+    width: 8.6px;
+    height: 8.6px;
+    position: absolute;
+    top: 12.77px;
+    left: 288.56px;
+    cursor: pointer;
+}
+
+#text-section {
+    width: 238.27px;
+    height: 250.5px;
+    position: absolute;
+    top: 33.39px;
+    left: 35.45px;
+    text-align: center;
+}
+
+#zagolovok {
+    width: 173px;
+    height: 42px;
+    position: absolute;
+    left: 32.57px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17.2px;
+    line-height: 20.81px;
+    color: #000;
+    text-align: center;
+}
+
+#text-vvod-name, #text-vvod-phone {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 9.43px;
+    color: #828282;
+    text-align: left;
+    position: relative;
+    top: 58.54px;
+    left: 26.69px;
+}
+
+#name-input, #phone-input {
+    width: 205.7px;
+    height: 34.45px;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+    text-indent: 8.47px;
+    font-size: 14px;
+    position: relative;
+    top: 50px;
+}
+
+#obr-zvon-button {
+    width: 238.27px;
+    height: 35.03px;
+    border-radius: 15.76px;
+    background: #413DF1;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 75px;
+}
+
+#button-obr-zvon {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12.72px;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+@keyframes animation {
+    from {
+        right: -500px
+    }
+    to {
+        right: 50px
+    }
+}
+
+.widget {
+    animation: 2s animation;
+}

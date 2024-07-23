@@ -1,0 +1,174 @@
+﻿/* Стили для основного контейнера виджета */
+#notification-widget {
+    display: flex; /* Показываем виджет сразу для тестирования */
+    position: fixed; /* Фиксируем виджет на экране */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center; /* Центруем содержимое по горизонтали */
+    align-items: center; /* Центруем содержимое по вертикали */
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для затемнения заднего плана */
+    z-index: 9999; /* Устанавливаем высокий z-index, чтобы виджет был выше других элементов на странице */
+}
+
+/* Стили для содержимого виджета */
+#notification-content {
+    display: flex; /* Для расположения изображения и текста рядом */
+    background: #fff; /* Белый фон для содержимого виджета */
+    border-radius: 20px; /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень вокруг содержимого для визуального выделения */
+    overflow: hidden; /* Для обрезания содержимого, выходящего за границы контейнера */
+    position: relative; /* Для позиционирования кнопки закрытия относительно содержимого */
+    width: 800px; /* Указываем ширину содержимого виджета */
+    height: 500px; /* Указываем высоту содержимого виджета */
+}
+
+/* Стили для секции с изображением */
+#image-section {
+    position: relative; /* Устанавливаем позиционирование для вложенного псевдоэлемента */
+}
+
+#image-section img {
+    width: 400px; /* Фиксированная ширина изображения */
+    height: 500px; /* Высота изображения равна высоте контейнера */
+    object-fit: cover; /* Изображение заполняет контейнер, сохраняя пропорции */
+}
+
+#image-section::after {
+    content: ''; /* Пустое содержимое для псевдоэлемента */
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(244, 174, 63, 0.65); /* Цвет фильтра с 65% прозрачностью */
+}
+
+/* Стили для кнопки закрытия виджета */
+#close-widget {
+    position: absolute; /* Абсолютное позиционирование внутри содержимого */
+    top: 5px; /* Отступ сверху */
+    left: 756.13px; /* Отступ справа */
+    /*width: 13.75px;
+    height: 13.75px;*/
+    font-size: 34px; /* Размер шрифта для иконки закрытия */
+    cursor: pointer; /* Указатель курсора при наведении */
+    color: #333333;
+}
+
+#rectangle {
+    width: 128px;
+    height: 7px;
+    top: 91px;
+    left: 444px;
+    border-radius: 14px;
+    background: #F7AC30;
+}
+
+/* Стили для секции с текстом */
+#text-section {
+    width: 335px;
+    height: 318px;
+    top: 91px;
+    left: 443px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    text-align: left;
+    position: absolute;
+}
+
+/* Стили для заголовка */
+#text-zagl {
+    position: relative;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30.48px;
+    width: 334px;
+    height: 60px;
+    top: 22px;
+    margin: 0px;
+}
+.first-part {
+    color: #191919;
+}
+
+.second-part {
+    color: #F7AC30;
+}
+
+/* Стили для текста под заголовком */
+#email-text {
+    width: 284px; /* Ширина текста */
+    height: 42px; /* Высота текста */
+    position: absolute; /* Абсолютное позиционирование */
+    top: 200px; /* Отступ сверху */
+    left: 444px; /* Отступ слева */
+    font-family: 'Montserrat', sans-serif; /* Шрифт текста */
+    font-weight: 400; /* Начертание шрифта */
+    font-size: 14px; /* Размер шрифта */
+    line-height: 18.2px; /* Межстрочный интервал */
+    color: #4F4F4F; /* Цвет текста */
+}
+
+
+/* Стили для параграфа */
+#text-email {
+    position: absolute;
+    top: 109px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18.2px;
+    color: #4F4F4F;
+    margin: 0px;
+}
+.email {
+    font-family: 'Montserrat';
+    font-weight: 600;
+}
+
+/* Стили для поля ввода */
+#email-input {
+    font-family: 'Montserrat';
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 13.72px;
+    color: #6B6B6B;
+    position: absolute;
+    top: 169px;
+    text-align: center;
+    width: 265px;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid #747474;
+    left: 3px;
+}
+
+/* Стили для кнопки уведомлений */
+#notify-button {
+    position: absolute;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13.72px;
+    width: 304px;
+    height: 38px;
+    text-align: center;
+    padding: 10px;
+    background: #EB9302;
+    color: #fff;
+    border: none;
+    border-radius: 17px;
+    cursor: pointer;
+    font-size: 14px;
+    top: 273px;
+}
+
+/* Стили для кнопки уведомлений при наведении */
+#notify-button:hover {
+    background: #d07c1f; /* Изменение цвета фона при наведении */
+}

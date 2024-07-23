@@ -1,0 +1,109 @@
+﻿#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#notification-widget {
+    display: flex; /* Показываем виджет сразу для тестирования */
+    position: fixed; /* Фиксируем виджет на экране */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center; /* Центруем содержимое по горизонтали */
+    align-items: center; /* Центруем содержимое по вертикали */
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для затемнения заднего плана */
+    z-index: 9999; /* Устанавливаем высокий z-index, чтобы виджет был выше других элементов на странице */
+}
+
+/* Стили для содержимого виджета */
+#notification-content {
+    display: flex; /* Для расположения изображения и текста рядом */
+    background: #fff; /* Белый фон для содержимого виджета */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень вокруг содержимого для визуального выделения */
+    overflow: hidden; /* Для обрезания содержимого, выходящего за границы контейнера */
+    position: relative; /* Для позиционирования кнопки закрытия относительно содержимого */
+    width: 800px; /* Указываем ширину содержимого виджета */
+    height: 500px; /* Указываем высоту содержимого виджета */
+}
+
+#social-widget {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    width: 800px;
+    height: 500px;
+    position: absolute;
+}
+
+#image-section {
+    position: relative; /* Устанавливаем позиционирование для вложенного псевдоэлемента */
+}
+
+    #image-section img {
+        width: 407px; /* Фиксированная ширина изображения */
+        height: 500px; /* Высота изображения равна высоте контейнера */
+        object-fit: cover; /* Изображение заполняет контейнер, сохраняя пропорции */
+        border-radius: 20px 0px 0px 20px;
+    }
+
+#text-section {
+    width: 300px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    height: 125px;
+    top: 125px;
+    left: 452px;
+}
+
+    #text-section h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 31.36px;
+        color: #000000;
+        margin: 0px;
+    }
+
+    #text-section p {
+        font-family: 'Exo2', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: #4F4F4F;
+        position: absolute;
+        top: 77px;
+        margin: 0px;
+    }
+
+#social-icons {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 160px;
+}
+
+    #social-icons img {
+        width: 54.43px;
+        height: 54.43px;
+        cursor: pointer;
+    }
+
+#close-widget {
+    width: 13.75px;
+    height: 13.75px;
+    position: absolute;
+    top: 30.13px;
+    left: 756.13px;
+    cursor: pointer;
+}

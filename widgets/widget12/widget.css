@@ -1,0 +1,88 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-info {
+    width: 450px;
+    height: 84px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    padding: 0;
+}
+
+#close-widget {
+    width: 8.4px;
+    height: 8.4px;
+    position: absolute;
+    top: 12px;
+    left: 429.6px;
+    cursor: pointer;
+}
+
+#group-section {
+    width: 404px;
+    height: 52.8px;
+}
+
+#image-section img {
+    width: 52.8px;
+    height: 52.8px;
+    position: absolute;
+    top: 15.6px;
+    left: 22.8px;
+}
+
+#text-section h2 {
+    width: 338px;
+    height: 20px;
+    position: absolute;
+    top: 21.6px;
+    left: 88.8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16.8px;
+    line-height: 20.33px;
+    color: #000;
+}
+
+#text-section p {
+    width: 172px;
+    height: 17px;
+    position: absolute;
+    top: 45.6px;
+    left: 88.8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14.4px;
+    line-height: 17.43px;
+    color: #000;
+}
+
+@keyframes animation {
+    from {
+        bottom: -500px
+    }
+    to {
+        bottom: 50px
+    }
+}
+
+.widget {
+    animation: 2s animation;
+}

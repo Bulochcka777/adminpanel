@@ -1,0 +1,99 @@
+﻿#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-soc-seti {
+    width: 309.58px;
+    height: 317px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #111;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+
+#text-section {
+    width: 257.76px;
+    height: 194.91px;
+    position: absolute;
+    top: 28.9px;
+    left: 34.29px;
+}
+
+#zagolovok {
+    width: 257.76px;
+    height: 52.69px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 22.76px;
+    line-height: 27.55px;
+    color: #FFF;
+    text-align: center;
+}
+
+#button-group-soc-seti {
+    width: 250.54px;
+    height: 109.47px;
+    position: absolute;
+    top: 85.44px;
+    display: grid;
+    gap: 8.33px;
+}
+
+    #button-group-soc-seti button {
+        width: 250.54px;
+        height: 31.2px;
+        left: 36.49px;
+        border-radius: 14.17px;
+        border: none;
+        cursor: pointer;
+    }
+
+    #button-group-soc-seti span {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 11.67px;
+        color: #FFFFFF;
+        line-height: 11.43px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+#vk-button {
+    top:114.34px;
+    background: #4D76A1;
+}
+
+#telegram-button {
+    top: 153.47px;
+    background: #2AABEE;
+}
+
+#instagram-button {
+    top: 192.61px;
+    background: #F3267A;
+}
+
+@keyframes animation {
+    from {
+        right: -500px
+    }
+
+    to {
+        right: 50px
+    }
+}
+
+.widget {
+    animation: 2s animation;
+}

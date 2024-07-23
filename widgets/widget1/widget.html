@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/widgets/widget1/widget.css">
+    <title>Notification Widget</title>
+</head>
+<body>
+    <div id="notification-widget">
+        <div id="notification-content">
+            <div id="image-section">
+                <img src="/widgets/widget1/w1.png" alt="Notification Image">
+            </div>
+            <span id="close-widget">&times;</span>
+            <div id="text-section">
+                <div id="rectangle"></div>
+                <h2 id="text-zagl">
+                    <span class="first-part">Не нашли подходящий</span><br>
+                    <span class="second-part">для Вас вариант?</span>
+                </h2>
+                <p id="text-email">
+                    Оставьте
+                    <span class="oun-email">свой E-mail</span>
+                    и мы сообщим Вам о новом поступлении товара
+                </p>
+                <input type="email" id="email-input" placeholder="username@gmail.com">
+                <button id="notify-button">ПОЛУЧАТЬ УВЕДОМЛЕНИЯ</button>
+            </div>
+        </div>
+    </div>
+    <script src="/widgets/widget1/widget.js"></script>
+</body>
+</html>

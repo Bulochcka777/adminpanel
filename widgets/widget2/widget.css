@@ -1,0 +1,153 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-obr-zvon {
+    display: flex;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    overflow: hidden;
+    position: relative; 
+    width: 500px;
+    height: 582.83px; 
+}
+
+#close-widget {
+    width: 13.75px;
+    height: 13.75px;
+    position: absolute;
+    top: 30px;
+    left: 456.13px;
+    cursor: pointer;
+}
+
+#zagolovok {
+    width: 283px;
+    height: 41px;
+    position: absolute;
+    top: 66px;
+    left: 104px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40.64px;
+    color: #191919;
+    text-align: center;
+    margin: 0px;
+}
+
+#text-postcriot {
+    width: 392px;
+    height: 50px;
+    position: absolute;
+    top: 130px;
+    left: 54px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25.4px;
+    text-align: center;
+    margin: 0px;
+}
+
+.first-part {
+    color: #828282;
+}
+
+.second-part {
+    color: #638A96;
+}
+
+#text-vvod-name{
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20.32px;
+    color: #828282;
+    text-align: left;
+    position: absolute;
+    top: 228px;
+    left: 96px;
+}
+
+#text-vvod-phone {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20.32px;
+    color: #828282;
+    text-align: left;
+    position: absolute;
+    top: 314px;
+    left: 96px;
+}
+
+#name-input {
+    width: 349.01px;
+    height: 34.45px;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+    text-indent: 12px;
+    font-size: 14px;
+    position: absolute;
+    top: 245px;
+    left: 79.99px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25.4px;
+    color: #000;
+}
+
+#phone-input {
+    width: 349.01px;
+    height: 34.45px;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+    text-indent: 12px;
+    font-size: 14px;
+    position: absolute;
+    top: 333px;
+    left: 79.99px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25.4px;
+    color: #000;
+}
+
+#obr-zvon-button {
+    width: 242px;
+    height: 38px;
+    border-radius: 17px;
+    background: #7FA7B2;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 416px;
+    left: 128.5px;
+    gap: 10px;
+}
+
+#button-obr-zvon {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13.72px;
+    color: #FFF;
+    text-transform: uppercase;
+}

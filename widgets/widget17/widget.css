@@ -1,0 +1,165 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-obr-zvon {
+    display: flex;
+    background: #fff;
+    border-radius: 13.64px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    overflow: hidden;
+    position: relative; 
+    width: 341px;
+    height: 482px; 
+}
+
+#close-widget {
+    width: 9.38px;
+    height: 9.38px;
+    position: absolute;
+    top: 25px;
+    left: 311.08px;
+    cursor: pointer;
+}
+
+#question {
+    width: 233px;
+    height: 28px;
+    position: absolute;
+    top: 49.47px;
+    left: 54px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 21.82px;
+    line-height: 27.72px;
+    color: #191919;
+    text-align: center;
+}
+
+#zagolovok {
+    width: 142px;
+    height: 20px;
+    position: absolute;
+    top: 132px;
+    left: 100px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20.32px;
+    color: #191919;
+    text-align: center;
+}
+
+#text-postcriot {
+    width: 267.34px;
+    height: 34px;
+    position: absolute;
+    top: 157px;
+    left: 37px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 13.64px;
+    line-height: 17.32px;
+    text-align: center;
+}
+
+.first-part {
+    color: #828282;
+}
+
+.second-part {
+    color: #638A96;
+}
+
+#text-vvod-name{
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 10.91px;
+    line-height: 13.86px;
+    color: #828282;
+    text-align: left;
+    position: absolute;
+    top: 213px;
+    left: 66.84px;
+}
+
+#text-vvod-phone {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 10.91px;
+    line-height: 13.86px;
+    color: #828282;
+    text-align: left;
+    position: absolute;
+    top: 271.65px;
+    left: 65.47px;
+}
+
+#name-input {
+    width: 238.03px;
+    height: 27px;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+    text-indent: 10px;
+    font-size: 13.64px;
+    position: absolute;
+    top: 232.1px;
+    left: 54.55px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13.64px;
+    line-height: 17.32px;
+    color: #000;
+}
+
+#phone-input {
+    width: 238.03px;
+    height: 27px;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+    text-indent: 10px;
+    font-size: 13.64px;
+    position: absolute;
+    top: 292.11px;
+    left: 54.55px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13.64px;
+    line-height: 17.32px;
+    color: #000;
+}
+
+#obr-zvon-button {
+    width: 165.84px;
+    height: 25.37px;
+    border-radius: 11.59px;
+    background: #7FA7B2;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 371.38px;
+    left: 87.24px;
+    gap: 6.82px;
+}
+
+#button-obr-zvon {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 9.55px;
+    line-height: 9.36px;
+    color: #FFF;
+    text-transform: uppercase;
+}

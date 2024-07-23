@@ -1,0 +1,130 @@
+﻿/* Стили для основного контейнера виджета */
+#notification-widget {
+    display: flex; /* Показываем виджет сразу для тестирования */
+    position: fixed; /* Фиксируем виджет на экране */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center; /* Центруем содержимое по горизонтали */
+    align-items: center; /* Центруем содержимое по вертикали */
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для затемнения заднего плана */
+    z-index: 9999; /* Устанавливаем высокий z-index, чтобы виджет был выше других элементов на странице */
+}
+
+/* Стили для содержимого виджета */
+#widget-email {
+    background: #fff; /* Белый фон для содержимого виджета */
+    border-radius: 20px; /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень вокруг содержимого для визуального выделения */
+    position: relative; /* Для позиционирования кнопки закрытия относительно содержимого */
+    width: 400px; /* Указываем ширину содержимого виджета */
+    text-align: center;
+    width: 500px; /* Указываем ширину содержимого виджета */
+    height: 582.83px; /* Указываем высоту содержимого виджета */
+}
+
+/* Стили для кнопки закрытия виджета */
+#close-widget {
+    position: absolute;
+    top: 30.13px;
+    left: 456.13px;
+    font-size: 34px;
+    cursor: pointer;
+}
+
+/* Стили для заголовка */
+#text-zagl {
+    position: absolute;
+    top: 96px;
+    left: 42px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40.64px;
+    text-align: center;
+    margin: 0px;
+}
+
+/* Стили для текста под заголовком */
+#text2 {
+    position: absolute;
+    top: 147px;
+    left: 135px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 20px; /* Размер шрифта */
+    line-height: 25.4px;
+    text-align: center;
+    color: #828282; /* Цвет текста */
+    margin: 0px;
+}
+#number-text {
+    position: absolute;
+    top: 314px;
+    left: 96px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20.32px;
+    text-align: center;
+    color: #828282;
+    margin: 0px;
+}
+
+/* Стили для секции с иконками */
+#icons-section {
+    display: inline-flex;
+    position: absolute;
+    top: 206px;
+    left: 72px;
+    padding: 0px 0px 10px 0px; /* Отступы между иконками */
+    gap: 66.93px;
+}
+
+.icon {
+    display: flex;
+    width: 73.95px; /* Ширина иконок */
+    height: 73.95px; /* Высота иконок */   
+}
+
+/* Стили для поля ввода */
+#phone-input {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    text-indent: 13px;
+    font-size: 20px;
+    line-height: 25.4px;
+    width: 349.01px;
+    position: absolute;
+    top: 344px;
+    left: 79.99px;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+}
+
+/* Стили для кнопки уведомлений */
+#notify-button {
+    position:absolute;
+    width: 191px;
+    height: 38px;
+    top: 420px;
+    left: 154px;
+    border-radius: 17px;
+    padding: 12px 49px 12px 49px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px; /* Размер шрифта */
+    line-height: 13.72px;
+    text-align: center;
+    background: #413DF1; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста кнопки */
+    border: none; /* Без границ */
+    cursor: pointer; /* Указатель курсора при наведении */
+}
+
+    /* Стили для кнопки уведомлений при наведении */
+    #notify-button:hover {
+        background: #d07c1f; /* Изменение цвета фона при наведении */
+    }

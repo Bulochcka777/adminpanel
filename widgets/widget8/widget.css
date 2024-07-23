@@ -1,0 +1,100 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-rasprodasha {
+    width: 309.58px;
+    height: 317px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+}
+
+#close-widget {
+    width: 8.6px;
+    height: 8.6px;
+    position: absolute;
+    top: 12.77px;
+    left: 288.56px;
+    cursor: pointer;
+}
+
+#zagolovok {
+    width: 179px;
+    height: 21px;
+    position: absolute;
+    top: 33.39px;
+    left: 65.13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17.2px;
+    line-height: 20.81px;
+    color: #000;
+    text-align: center;
+}
+
+#image-section{
+    width: 128.2px;
+    height: 128.2px;
+    position: absolute;
+    top: 72.14px;
+    left: 90.69px;
+}
+
+    #image-section img {
+        width: 128.2px;
+        height: 128.2px;
+        object-fit: cover;
+    }
+
+#rasprodasha-button {
+    width: 206.91px;
+    height: 25.89px;
+    position: absolute;
+    top: 220.28px;
+    left: 50.41px;
+    border-radius: 11.76px;
+    gap: 6.92px;
+    background: #F23E7F;
+    border: none;
+    cursor: pointer;
+}
+
+#button-rasprodasha {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 9.68px;
+    line-height: 9.49px;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+@keyframes animation {
+    from {
+        left: -500px
+    }
+
+    to {
+        left: 50px
+    }
+}
+
+.widget {
+    animation: 2s animation;
+}

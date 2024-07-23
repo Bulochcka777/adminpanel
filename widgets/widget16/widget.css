@@ -1,0 +1,72 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: #000; /* Full width and fixed position */
+}
+
+#widget-email {
+    width: 100%;
+    height: 57px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#group-section {
+    display: flex;
+    align-items: center;
+}
+
+    #group-section p {
+        color: #FFF;
+        margin-right: 78px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29.05px;
+        color: #FFF;
+    }
+
+#email-input {
+    width: 200px;
+    height: 37px;
+    padding: 0 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+#email-button {
+    width: 120px; /* Adjust width as needed */
+    height: 37px;
+    border-radius: 5px;
+    background-color: #413DF1;
+    border: none;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    #email-button span {
+        display: block;
+        text-align: center;
+        line-height: 37px; /* Center text vertically */
+    }

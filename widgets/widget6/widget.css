@@ -1,0 +1,163 @@
+﻿@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+/* Стили для основного контейнера виджета */
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+#widget-reaction {
+    width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #FFF;
+    display: flex;
+    position: absolute;
+}
+
+#close-widget {
+    width: 13.75px;
+    height: 13.75px;
+    position: absolute;
+    top: 30.13px;
+    left: 756.13px;
+    cursor: pointer;
+}
+
+#image-section {
+    width: 407px;
+    height: 500px;
+    object-fit: cover;
+}
+
+#text-section {
+    width: 393px;
+    height: 500px;
+    position: absolute;
+    left: 407px;
+}
+
+#text-zagl {
+    width: 280px;
+    height: 31px;
+    position: relative;
+    top: 63px;
+    left: 52px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 31.36px;
+    color: #000;
+    margin: 0px;
+}
+
+#question1 p {
+    width: 238px;
+    height: 28px;
+    position: absolute;
+    top: 129px;
+    left: 52px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14.4px;
+    color: #4F4F4F;
+    margin: 0px;
+}
+
+#question2 p {
+    width: 238px;
+    height: 14px;
+    position: absolute;
+    top: 237px;
+    left: 52px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14.4px;
+    color: #4F4F4F;
+    margin: 0px;
+}
+
+.hidden-radio {
+    display: none;
+}
+
+#otvet-question1 label, #otvet-question2 label {
+    display: inline-block;
+    margin: 5px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+#otvet-question1 input[type="radio"]:checked + label img,
+#otvet-question2 input[type="radio"]:checked + label img {
+    transform: scale(1.2);
+}
+
+#otvet-question1 img, #otvet-question2 img {
+    transition: transform 0.2s ease;
+}
+
+#otvet-question1 {
+    width: 237.54px;
+    height: 51.89px;
+    position: absolute;
+    top: 167px;
+    left: 52px;
+    display: flex;
+    gap: 10px;
+}
+
+    #otvet-question1 img {
+        width: 51.89px;
+        height: 51.89px;
+    }
+
+#otvet-question2 {
+    width: 237.54px;
+    height: 51.89px;
+    position: absolute;
+    top: 261px;
+    left: 52px;
+    display: flex;
+    gap: 10px;
+}
+
+    #otvet-question2 img {
+        width: 51.89px;
+        height: 51.89px;
+    }
+
+#reaction-button {
+    width: 280px;
+    height: 38px;
+    position: absolute;
+    top: 348px;
+    left: 52px;
+    border-radius: 17px;
+    background: #F4D76F;
+    border: none;
+}
+
+#button-reaction {
+    width: 280px;
+    height: 14px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13.72px;
+    text-align: center;
+    color: #000;
+}

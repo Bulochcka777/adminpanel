@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/montserrat" rel="stylesheet">
+    <title>Widget Transition</title>
+    <link rel="stylesheet" href="/widgets/widget11/widget.css">
+</head>
+<body>
+    <div id="notification-widget">
+        <div class="widget-container">
+            <div id="widget1" class="widget">
+                <div class="widget-content">
+                    <div id="image-section">
+                        <img src="/widgets/widget11/help.png" alt="Fire Image">
+                    </div>
+                    <h2>Не можете решить вопрос?</h2>
+                    <p>Наш специалист поможет!</p>
+                </div>
+                <img id="close-widget1" src="/widgets/widget11/x.png" alt="close Image">
+            </div>
+            <div id="widget2" class="widget hidden">
+                <div class="widget-content">
+                    <p>Заполните форму на обратный звонок</p>
+                    <label for="name-input" id="text-vvod-name">имя</label>
+                    <input type="text" id="name-input" placeholder="Елена">
+                    <label for="phone-input" id="text-vvod-phone">телефон*</label>
+                    <input type="text" id="phone-input" placeholder="8 9XX XXX XX XX">
+                    <button id="obr-zvon-button"><span id="button-obr-zvon">отправить</span></button>
+                </div>
+                <img id="close-widget2" src="/widgets/widget11/x.png" alt="close Image">
+            </div>
+        </div>
+    </div>
+    <script src="/widgets/widget11/widget.js"></script>
+</body>
+</html>

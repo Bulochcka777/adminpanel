@@ -1,0 +1,229 @@
+﻿@import url('https://fonts.cdnfonts.com/css/inter');
+
+#notification-widget {
+    display: flex; /* Показываем виджет сразу для тестирования */
+    position: fixed; /* Фиксируем виджет на экране */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center; /* Центруем содержимое по горизонтали */
+    align-items: center; /* Центруем содержимое по вертикали */
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для затемнения заднего плана */
+    z-index: 9999; /* Устанавливаем высокий z-index, чтобы виджет был выше других элементов на странице */
+}
+
+#survey-widget {
+    width: 352.18px;
+    height: 557px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+
+#close-widget {
+    width: 13.03px;
+    height: 13.03px;
+    position: absolute;
+    top: 19.34px;
+    left: 320.34px;
+    cursor: pointer;
+}
+
+#text-section {
+    width: 282.1px;
+    height: 447.16px;
+    position: absolute;
+    top: 34.97px;
+    left: 34.97px;
+}
+
+#zagolovok {
+    width: 196.23px;
+    height: 38px;
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15.74px;
+    line-height: 19.05px;
+    color: #000;
+}
+
+#questions {
+    width: 282.1px;
+    height: 333.51px;
+    position: absolute;
+    top: 63.46px;
+    display: flex;
+    gap: 21.79px;
+}
+
+#question1 {
+    width: 282.1px;
+    height: 91.29px;
+    position: absolute;
+}
+
+#text-postcriot {
+    width: 250px;
+    height: 15px;
+    position: relative;
+    left: 0.2px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12.49px;
+    line-height: 15.11px;
+    color: #000;
+}
+
+#radio-group1, #radio-group2 {
+    width: 282.1px;
+    height: 30.27px;
+    position: absolute;
+    top: 24.31px;
+    display: flex;
+    gap: 32.69px;
+}
+
+#radio-group3 {
+    width: 282.1px;
+    height: 30.27px;
+    position: absolute;
+    top: 37.31px;
+    display: flex;
+    gap: 32.69px;
+}
+
+.radio-input {
+    display: none; /* Скрываем стандартные радио-кнопки */
+}
+
+.radio-label {
+    width: 30.27px;
+    height: 30.27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.75px solid #413DF1;
+    border-radius: 3.77px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14.53px;
+    line-height: 17.58px;
+    color: #000;
+}
+
+.radio-input:checked + .radio-label {
+    background-color: #413DF1; /* Цвет фона для выбранной кнопки */
+    color: white; /* Цвет текста для выбранной кнопки */
+}
+
+.radio-label:hover {
+    background-color: #413DF1; /* Цвет фона при наведении */
+}
+
+#text-poasn1 {
+    width: 74px;
+    height: 30px;
+    position: absolute;
+    top: 60.29px;
+    left: 0.2px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12.11px;
+    line-height: 14.65px;
+    color: #8E8E8E;
+}
+
+#text-poasn2 {
+    width: 74px;
+    height: 30px;
+    position: absolute;
+    top: 60.29px;
+    right: 0.2px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12.11px;
+    line-height: 14.65px;
+    color: #8E8E8E;
+}
+
+#text-poasn3 {
+    width: 74px;
+    height: 30px;
+    position: absolute;
+    top: 75.29px;
+    left: 0.2px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12.11px;
+    line-height: 14.65px;
+    color: #8E8E8E;
+}
+
+#text-poasn4 {
+    width: 74px;
+    height: 30px;
+    position: absolute;
+    top: 75.29px;
+    right: 0.2px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12.11px;
+    line-height: 14.65px;
+    color: #8E8E8E;
+}
+
+#question2 {
+    width: 282.1px;
+    height: 91.29px;
+    position: absolute;
+    top: 106.79px;
+}
+
+#question3 {
+    width: 282.1px;
+    height: 108.55px;
+    position: absolute;
+    top: 211.79px;
+}
+
+#test-button {
+    width: 200.04px;
+    height: 29.41px;
+    position: absolute;
+    top: 404.29px;
+    left: 41.21px;
+    border-radius: 13.23px;
+    gap: 7.78px;
+    background: #413DF1;
+    border: none;
+    cursor: pointer;
+}
+
+#button-test {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 10.9px;
+    line-height: 10.68px;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+@keyframes animation {
+    from {
+        right: -500px
+    }
+
+    to {
+        right: 50px
+    }
+}
+
+.widget {
+    animation: 2s animation;
+}

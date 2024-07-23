@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+        }
+
+        header a,
+        header h1 {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        header h1 {
+            margin: 0;
+            text-align: center;
+        }
+
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .goal-form {
+            margin-bottom: 20px;
+        }
+
+        .goal-item {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .actions form {
+            display: flex;
+            align-items: center;
+        }
+
+        .actions input[type="text"],
+        .actions button {
+            margin: 0;
+        }
+
+        p {
+            margin: 0px;
+        }
+
+        h2 {
+            margin: 0px;
+
+        }
+
+        #site-select-container {
+            margin-bottom: 10px;
+        }
+
+        #time-filters {
+            margin-bottom: 10px;
+        }
+
+        #time-filters input {
+            margin-right: 5px;
+        }
+
+        /* .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+        }
+        .close {
+            float: right;
+            cursor: pointer;
+        } */
+
+    </style>
+    <script>
+        let data_loaded = "false";
+        document.addEventListener("DOMContentLoaded", function () {
+            //Функция загрузки вкладок
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tab-links");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                var tabElement = document.getElementById(tabName);
+                if (tabElement) {
+                    tabElement.style.display = "block";
+                    evt.currentTarget.className += " active";
+                } else {
+                    console.error(`Element with id '${tabName}' not found.`);
+                }
+            }
+            //Первая вкладка по умолчанию
+            function loadDefaultTab() {
+                var firstTab = document.getElementsByClassName("tab-links")[0];
+                if (firstTab) {
+                    firstTab.click();
+                } else {
+                    console.error("No tab-links found.");
+                }
+            }
+
+            window.openTab = openTab;
+
+            loadDefaultTab();
+        });
+
+        //функция показа виджетов
+        function showWidget(widgetId) {
+    const widgetPath = `widgets/${widgetId}/widget.html`;
+    const widgetCssPath = `widgets/${widgetId}/widget.css`;
+    const widgetJsPath = `widgets/${widgetId}/widget.js`;
+
+    // Удаление старых CSS и JS
+    removeWidgetResources();
+
+    const widgetContentElement = document.getElementById('widget-content');
+    if (!widgetContentElement) {
+        console.error("Элемент с id 'widget-content' не найден.");
+        return;
+    }
+
+    // Загрузка HTML содержимого виджета
+    fetch(widgetPath)
+        .then(response => response.text())
+        .then(data => {
+            widgetContentElement.innerHTML = data;
+            widgetContentElement.style.display = 'block';
+
+            // Загрузка CSS
+            loadCss(widgetCssPath);
+
+            // Загрузка JS
+            loadJs(widgetJsPath);
+        })
+        .catch(error => {
+            console.error('Ошибка загрузки виджета:', error);
+            widgetContentElement.innerHTML = '<p>Ошибка загрузки виджета.</p>';
+        });
+}
+
+function closeWidget() {
+    const widgetContentElement = document.getElementById('widget-content');
+    if (widgetContentElement) {
+        widgetContentElement.style.display = 'none';
+        widgetContentElement.innerHTML = '';
+        removeWidgetResources();
+    } else {
+        console.error("Элемент с id 'widget-content' не найден.");
+    }
+}
+
+        function loadCss(href) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            link.className = 'widget-resource';
+            document.head.appendChild(link);
+        }
+
+        function loadJs(src) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.className = 'widget-resource';
+            document.body.appendChild(script);
+        }
+
+        function removeWidgetResources() {
+            const resources = document.querySelectorAll('.widget-resource');
+            resources.forEach(resource => resource.remove());
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+    </header>
+    <div class="container">
+        <!--Вкладки на админ панели-->
+        <div class="tab" role="tablist">
+            <button class="tab-links" onclick="openTab(event, 'logs-tab')" role="tab"
+                aria-controls="logs-tab">Logs</button>
+            <button class="tab-links" onclick="openTab(event, 'goal-tab')" role="tab" aria-controls="goal-tab">Целевые
+                действия</button>
+            <button class="tab-links" onclick="openTab(event, 'widg-tab')" role="tab"
+                aria-controls="widg-tab">Виджеты</button>
+            <button class="tab-links" onclick="openTab(event, 'script-tab')" role="tab"
+                aria-controls="script-tab">Параметры скрипта</button>
+            <button class="tab-links" onclick="openTab(event, 'users-tab')" role="tab"
+                aria-controls="users-tab">Пользователи</button>
+            <button class="tab-links" onclick="openTab(event, 'sites-tab')" role="tab"
+                aria-controls="sites-tab">Подключённые сайты</button>
+            <button class="tab-links" onclick="openTab(event, 'analitic-tab')" role="tab"
+                aria-controls="analitic-tab">Аналитика</button>
+        </div>
+
+        <div id="logs-tab" class="tab-content" role="tabpanel">
+            <h3>Логи посещений</h3>
+            <!-- Содержимое вкладки логов -->
+            <div id="site-select-container">
+                <select id="site-select">
+                    <!-- Динамически добавляемые опции будут появляться здесь -->
+                </select>
+            </div>
+            <div id="time-filters">
+                <input type="datetime-local" id="start-time">
+                <input type="datetime-local" id="end-time">
+                <button id="filter-time">Фильтровать по времени</button>
+            </div>
+            <div id="logs-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Уникальный ID сессии</th>
+                            <th>Регистрационный флаг</th>
+                            <th>ID пользователя</th>
+                            <th>Посещение</th>
+                            <th>Название сайта</th>
+                            <th>Домен</th>
+                            <th>Название цели</th>
+                            <th>Значение цели</th>
+                            <th>Виджет</th>
+                            <th>Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Logs}}
+                        <tr>
+                            <td>{{.Log_ID}}</td>
+                            <td>{{.Unique_ID}}</td>
+                            <td>{{.Reg_flag}}</td>
+                            <td>{{.Reg_ID}}</td>
+                            <td>{{.Visit}}</td>
+                            <td>{{.Site_Name}}</td>
+                            <td>{{.Domain}}</td>
+                            <td>{{.Goal_Name}}</td>
+                            <td>{{.Goal_Dvalue}}</td>
+                            <td>{{.Widget}}</td>
+                            <td>{{.Time}}</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="goal-tab" class="tab-content" role="tabpanel">
+            <h3>Целевые действия</h3>
+            <!-- Содержимое вкладки целевых действий -->
+            <form action="/goal" method="POST" class="goal-form">
+                <input type="text" name="goal_name" placeholder="Название цели">
+                <input type="text" name="goal_about" placeholder="Описание">
+                <button type="submit">Добавить</button>
+            </form>
+            <div id="goal-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Действие с данными</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Goals}}
+                        <tr>
+                            <td>{{.ID}}</td>
+                            <td>{{.Name}}</td>
+                            <td>{{.About}}</td>
+                            <td>
+                                <form action="/update-goal" method="POST" style="display: inline;">
+                                    <input type="hidden" name="goal_id" value="{{.ID}}">
+                                    <input type="text" name="goal_name" placeholder="Новое название">
+                                    <input type="text" name="goal_about" placeholder="Новое описание">
+                                    <button type="submit">Обновить</button>
+                                </form>
+                                <form action="/delete-goal" method="POST" style="display: inline;">
+                                    <input type="hidden" name="goal_id" value="{{.ID}}">
+                                    <button type="submit">Удалить</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="widg-tab" class="tab-content" role="tabpanel">
+            <h3>Представленные виджеты</h3>
+            <!-- Содержимое вкладки виджетов -->
+            <button onclick="showWidget('widget1')">Виджет 1</button>
+            <button onclick="showWidget('widget2')">Виджет 2</button>
+            <button onclick="showWidget('widget3')">Виджет 3</button>
+            <button onclick="showWidget('widget4')">Виджет 4</button>
+            <button onclick="showWidget('widget5')">Виджет 5</button>
+            <button onclick="showWidget('widget6')">Виджет 6</button>
+            <button onclick="showWidget('widget7')">Виджет 7</button>
+            <button onclick="showWidget('widget8')">Виджет 8</button>
+            <button onclick="showWidget('widget9')">Виджет 9</button>
+            <button onclick="showWidget('widget10')">Виджет 10</button>
+            <button onclick="showWidget('widget11')">Виджет 11</button>
+            <button onclick="showWidget('widget12')">Виджет 12</button>
+            <button onclick="showWidget('widget13')">Виджет 13</button>
+            <button onclick="showWidget('widget14')">Виджет 14</button>
+            <button onclick="showWidget('widget15')">Виджет 15</button>
+            <button onclick="showWidget('widget16')">Виджет 16</button>
+            <button onclick="showWidget('widget17')">Виджет 17</button>
+            <button onclick="showWidget('widget18')">Виджет 18</button>
+        </div>
+<!--для отрисовки виджетов на админке-->
+        <div id="widget-content"></div>
+
+        <div id="script-tab" class="tab-content" role="tabpanel">
+            <h3>Параметры скрипта</h3>
+            <form id="form" method="post">
+                <label for="site">Выберите сайт:</label>
+                <select name="site" id="site">
+                    <!-- данные из БД -->
+                </select>
+                <br><br>
+                <label for="widget">Выберите виджет:</label>
+                <select name="widget" id="widget">
+                    <!-- данные из БД -->
+                </select>
+                <br><br>
+                <label for="goal">Выберите целевое действие:</label>
+                <select name="goal" id="goal">
+                    <!-- данные из БД -->
+                </select>
+                <br><br>
+                <label for="dvalue">Введите параметр целевого действия:</label>
+                <input type="text" name="dvalue" id="dvalue">
+                <br><br>
+                <input type="hidden" name="id" id="hidden-id">
+                <button type="button" onclick="saveChanges()">Сохранить изменения</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Сайт</th>
+                        <th>Виджет</th>
+                        <th>Действие</th>
+                        <th>Параметр</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody id="script-table-body">
+                    <!-- Данные будут добавлены здесь с помощью JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- Модальное окно -->
+        <div id="editModal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <form id="edit-form" method="post">
+                    <label for="editSite">Выберите сайт:</label>
+                    <select name="site" id="editSite">
+                        <!-- данные из БД -->
+                    </select>
+                    <br><br>
+                    <label for="editWidget">Выберите виджет:</label>
+                    <select name="widget" id="editWidget">
+                        <!-- данные из БД -->
+                    </select>
+                    <br><br>
+                    <label for="editGoal">Выберите целевое действие:</label>
+                    <select name="goal" id="editGoal">
+                        <!-- данные из БД -->
+                    </select>
+                    <br><br>
+                    <label for="editDvalue">Введите параметр целевого действия:</label>
+                    <input type="text" name="dvalue" id="editDvalue">
+                    <br><br>
+                    <input type="hidden" name="id" id="edit-hidden-id">
+                    <button type="button" onclick="saveChanges()">Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="users-tab" class="tab-content" role="tabpanel">
+            <h3>Пользователи</h3>
+            <!-- Содержимое вкладки пользователей -->
+            <div id="goal-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Уникальный ID</th>
+                            <th>Флаг регистрации</th>
+                            <th>ID регистрации</th>
+                            <th>Реферальная ссылка</th>
+                            <th>Устройсто</th>
+                            <th>Браузер</th>
+                            <th>ОС</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Users}}
+                        <tr>
+                            <td>{{.ID}}</td>
+                            <td>{{.Unique_ID}}</td>
+                            <td>{{.Reg_flag}}</td>
+                            <td>{{.Reg_id}}</td>
+                            <td>{{.Referrer}}</td>
+                            <td>{{.Device_type}}</td>
+                            <td>{{.Browser}}</td>
+                            <td>{{.Os}}</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="sites-tab" class="tab-content" role="tabpanel">
+            <h3>Подключённые сайты</h3>
+            <!-- Содержимое вкладки подключённых сайтов -->
+            <form action="/add-site" method="POST">
+                <label for="site_name">Название сайта:</label>
+                <input type="text" id="site_name" name="site_name" required><br><br>
+
+                <input type="checkbox" id="site_working" name="site_working">
+                <label for="site_working">Работающий</label><br><br>
+
+                <input type="checkbox" id="site_debugging" name="site_debugging">
+                <label for="site_debugging">Отладка</label><br><br>
+
+                <label for="domain">Домен:</label>
+                <input type="text" id="domain" name="domain" required><br><br>
+
+                <button type="submit">Добавить</button>
+            </form>
+            <div id="sites-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Название</th>
+                            <th>Работа</th>
+                            <th>Отладка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Sites}}
+                        <tr>
+                            <td>{{.ID}}</td>
+                            <td>{{.Name}}</td>
+                            <td>
+                                <form action="/update-working" method="POST" style="display: inline;">
+                                    <input type="checkbox" id="working-{{.ID}}" name="working" data-site-id="{{.ID}}"
+                                        {{if .Working}}checked{{end}}>
+                                    <label for="working-{{.ID}}">Работающий</label>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/update-debugging" method="POST" style="display: inline;">
+                                    <input type="checkbox" id="debugging-{{.ID}}" name="debugging"
+                                        data-site-id="{{.ID}}" {{if .Debugging}}checked{{end}}>
+                                    <label for="debugging-{{.ID}}">Отладка</label>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/delete-site" method="POST" style="display: inline;">
+                                    <input type="hidden" name="site_id" value="{{.ID}}">
+                                    <button type="submit">Удалить</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+                <button onclick="sendCheckboxState()" type="button">Обновить</button>
+            </div>
+        </div>
+
+        <div id="analitic-tab" class="tab-content" role="tabpanel">
+            <h3>Аналитика</h3>
+            <!-- Содержимое вкладки аналитики -->
+            <form id="analytics-filter">
+                <div id="site-select-container">
+                    <select id="site-select-analytics">
+                        <!-- Динамически добавляемые опции будут появляться здесь -->
+                    </select>
+                </div>
+                <label for="time-from">От:</label>
+                <input type="datetime-local" id="time-from" name="time-from">
+
+                <label for="time-to">До:</label>
+                <input type="datetime-local" id="time-to" name="time-to">
+
+                <label for="action">Действие:</label>
+                <select id="action" name="action">
+                    <option value="">Все действия</option>
+                    <option value="closeForm">Закрытие формы</option>
+                    <option value="showingForm">Отображение формы</option>
+                    <option value="sendForm">Отправка формы</option>
+                </select>
+
+                <label for="widget-filter">Виджет:</label>
+                <select id="widget-filter" name="widget-filter">
+                    <!-- опции загружаются динамически из БД -->
+                </select>
+
+                <button type="button" onclick="filterAnalytics()">Применить фильтры</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Id сессии</th>
+                        <th>ID пользователя</th>
+                        <th>Сайт</th>
+                        <th>Действие</th>
+                        <th>Виджет</th>
+                        <th>Время</th>
+                        <th>Конверсия</th>
+                    </tr>
+                </thead>
+                <tbody id="analytics-table-body">
+                    {{range .Widget_Logs}}
+                    <tr>
+                        <td>{{.IDA}}</td>
+                        <td>{{.Unique_IDA}}</td>
+                        <td>{{.Reg_IDA}}</td>
+                        <td>{{.Site_NameA}}</td>
+                        <td>{{.Goal_NameA}}</td>
+                        <td>{{.WidgetA}}</td>
+                        <td>{{.TimeA}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(document).ready(function () {
+                // Функция для сортировки таблицы
+                function sortTable(table, column, asc = true) {
+                    const dirModifier = asc ? 1 : -1;
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+                    // Сортировка строк
+                    rows.sort((a, b) => {
+                        let aValue = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+                        let bValue = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+
+                        // Преобразование в числа, если возможно
+                        aValue = isNaN(aValue) ? aValue : parseFloat(aValue);
+                        bValue = isNaN(bValue) ? bValue : parseFloat(bValue);
+
+                        // Сравнение значений
+                        if (aValue > bValue) return 1 * dirModifier;
+                        if (aValue < bValue) return -1 * dirModifier;
+                        return 0;
+                    });
+
+                    // Добавление отсортированных строк обратно в таблицу
+                    while (table.querySelector('tbody').firstChild) {
+                        table.querySelector('tbody').removeChild(table.querySelector('tbody').firstChild);
+                    }
+
+                    table.querySelector('tbody').append(...rows);
+                }
+
+                // Function to filter table
+                function filterTable(table, query) {
+                    const rows = table.querySelectorAll('tbody tr');
+                    rows.forEach(row => {
+                        const cells = Array.from(row.querySelectorAll('td'));
+                        const match = cells.some(cell => cell.textContent.toLowerCase().includes(query.toLowerCase()));
+                        row.style.display = match ? '' : 'none';
+                    });
+                }
+
+                document.querySelectorAll('th').forEach(headerCell => {
+                    headerCell.addEventListener('click', () => {
+                        const tableElement = headerCell.parentElement.parentElement.parentElement;
+                        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+                        const currentIsAscending = headerCell.classList.contains('th-sort-asc');
+
+                        sortTable(tableElement, headerIndex, !currentIsAscending);
+
+                        headerCell.classList.toggle('th-sort-asc', !currentIsAscending);
+                        headerCell.classList.toggle('th-sort-desc', currentIsAscending);
+                    });
+                });
+
+                // Добавление поля для фильтрации
+                const filterInput = $('<input type="text" placeholder="Фильтр">').on('input', function () {
+                    const query = $(this).val();
+                    filterTable(document.querySelector('table'), query);
+                });
+
+                $('table').before(filterInput);
+
+                function filterTableBySite() {
+                    const selectedSite = $('#site-select').val();
+                    $('#logs-container tbody tr').each(function () {
+                        const site = $(this).find('td').eq(5).text();
+                        if (selectedSite === 'all' || site === selectedSite) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                function filterTableByTime() {
+                    const startTime = new Date($('#start-time').val());
+                    const endTime = new Date($('#end-time').val());
+                    $('#logs-container tbody tbody tr').each(function () {
+                        const logTime = new Date($(this).find('td').eq(10).text());
+                        if (logTime >= startTime && logTime <= endTime) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                $('#site-select').change(filterTableBySite);
+                $('#filter-time').click(filterTableByTime);
+
+
+                function filterAnalytics() {
+                    const site = $('#site-select-analytics').val();
+                    const timeFrom = new Date($('#time-from').val());
+                    const timeTo = new Date($('#time-to').val());
+                    const action = $('#action').val();
+                    const widget = $('#widget-filter').val();
+
+                    $('#analytics-table-body tr').each(function () {
+                        const rowSite = $(this).find('td').eq(3).text();
+                        const rowTime = new Date($(this).find('td').eq(6).text());
+                        const rowAction = $(this).find('td').eq(4).text();
+                        const rowWidget = $(this).find('td').eq(5).text();
+
+
+                        const matchesSite = !site || site === 'all' || rowSite === site;
+                        const matchesTime = (isNaN(timeFrom) || rowTime >= timeFrom) && (isNaN(timeTo) || rowTime <= timeTo);
+                        const matchesAction = !action || action === 'all' || rowAction === action;
+                        const matchesWidget = !widget || widget === 'all' || rowWidget === widget;
+
+                        if (matchesSite && matchesTime && matchesAction && matchesWidget) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                $('#site-select-analytics').change(filterAnalytics);
+                $('#time-from').change(filterAnalytics);
+                $('#time-to').change(filterAnalytics);
+                $('#action').change(filterAnalytics);
+                $('#widget-filter').change(filterAnalytics);
+
+                $(document).ready(function () {
+                    filterAnalytics();
+                });
+
+                // Загрузка сайтов из базы данных при загрузке страницы
+                $.get('/get-sites', function (sites) {
+                    const siteSelect = $('#site-select');
+                    const siteSelectA = $('#site-select-analytics');
+                    //для логов
+                    siteSelect.append(new Option('Все сайты', 'all'));
+                    sites.forEach(site => {
+                        siteSelect.append(new Option(site.Name, site.Name));
+                    });
+                    //для аналитики
+                    siteSelectA.append(new Option('Все сайты', 'all'));
+                    sites.forEach(site => {
+                        siteSelectA.append(new Option(site.Name, site.Name));
+                    });
+                });
+
+                $.get('/get-widgets', function (widgets) {
+                    const widgetSelect = $('#widget');
+                    const widgetFilter = $('#widget-filter');
+                    // для логов 
+                    widgetSelect.append(new Option('Все виджеты', 'all'));
+                    widgets.forEach(widget => {
+                        widgetSelect.append(new Option(widget.Name, widget.Name));
+                    });
+                    //для аналитики
+                    widgetFilter.append(new Option('Все виджеты', 'all'));
+                    widgets.forEach(widget => {
+                        widgetFilter.append(new Option(widget.Name, widget.Name));
+                    });
+                });
+            });
+//фильтрация для логов 
+            function filterLogs() {
+                const site = document.getElementById("siteFilter").value;
+                const startTime = document.getElementById("startTime").value;
+                const endTime = document.getElementById("endTime").value;
+
+                fetch(`/filter-logs?site=${site}&start_time=${startTime}&end_time=${endTime}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let logsTable = document.getElementById("logsTable");
+                        logsTable.innerHTML = "<tr><th>Log_ID</th><th>Unique_ID</th><th>Reg_flag</th><th>Reg_ID</th><th>Visit</th><th>Site_Name</th><th>Domain</th><th>Goal_Name</th><th>Goal_Dvalue</th><th>Widget</th><th>Time</th></tr>";
+
+                        data.forEach(log => {
+                            let row = logsTable.insertRow();
+                            row.insertCell(0).innerHTML = log.Log_ID;
+                            row.insertCell(1).innerHTML = log.Unique_ID;
+                            row.insertCell(2).innerHTML = log.Reg_flag;
+                            row.insertCell(3).innerHTML = log.Reg_ID;
+                            row.insertCell(4).innerHTML = log.Visit;
+                            row.insertCell(5).innerHTML = log.Site_Name;
+                            row.insertCell(6).innerHTML = log.Domain;
+                            row.insertCell(7).innerHTML = log.Goal_Name;
+                            row.insertCell(8).innerHTML = log.Goal_Dvalue;
+                            row.insertCell(9).innerHTML = log.Widget;
+                            row.insertCell(10).innerHTML = log.Time;
+                        });
+                    })
+                    .catch(error => console.error('Error fetching filtered logs:', error));
+            }
+
+//фультрация для аналитики
+            function filterAnalytics() {
+                const site = $('#site-select-analytics').val();
+                const timeFrom = new Date($('#time-from').val());
+                const timeTo = new Date($('#time-to').val());
+                const action = $('#action').val();
+                const widget = $('#widget-filter').val();
+
+                $('#analytics-table-body tr').each(function () {
+                    const rowSite = $(this).find('td').eq(3).text();
+                    const rowTime = new Date($(this).find('td').eq(6).text());
+                    const rowAction = $(this).find('td').eq(4).text();
+                    const rowWidget = $(this).find('td').eq(5).text();
+
+                    const matchesSite = !site || site === 'all' || rowSite === site;
+                    const matchesTime = (isNaN(timeFrom) || rowTime >= timeFrom) && (isNaN(timeTo) || rowTime <= timeTo);
+                    const matchesAction = !action || action === 'all' || rowAction === action;
+                    const matchesWidget = !widget || widget === 'all' || rowWidget === widget;
+
+                    if (matchesSite && matchesTime && matchesAction && matchesWidget) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            $('#site-select-analytics').change(filterAnalytics);
+            $('#time-from').change(filterAnalytics);
+            $('#time-to').change(filterAnalytics);
+            $('#action').change(filterAnalytics);
+            $('#widget-filter').change(filterAnalytics);
+
+            $(document).ready(function () {
+                filterAnalytics();
+            });
+
+            //функция для работы с данными о сайтах(вкл/выкл, отладка)
+            function sendCheckboxState() {
+                // Собрать состояния всех checkbox'ов и отправить на сервер
+                var workingCheckboxes = document.querySelectorAll('input[name="working"]');
+                var debuggingCheckboxes = document.querySelectorAll('input[name="debugging"]');
+                var data = [];
+
+                workingCheckboxes.forEach(function (checkbox) {
+                    data.push({
+                        siteID: parseInt(checkbox.id.split('-')[1]), // Преобразование ID в число
+                        field: 'working',
+                        isChecked: checkbox.checked
+                    });
+                });
+
+                debuggingCheckboxes.forEach(function (checkbox) {
+                    data.push({
+                        siteID: parseInt(checkbox.id.split('-')[1]), // Преобразование ID в число
+                        field: 'debugging',
+                        isChecked: checkbox.checked
+                    });
+                });
+
+                //console.log(JSON.stringify(data)); // Вывод данных в консоль
+
+                fetch('/update-fields', { // Полный URL с протоколом
+                    method: 'POST',
+                    body: JSON.stringify(data), // Используем JSON.stringify для преобразования данных
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (response) {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                }).then(function (data) {
+                    console.log('Success:', data);
+                }).catch(function (error) {
+                    console.error('Ошибка при отправке данных:', error);
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+    fetch("/fetch_data")
+        .then(response => response.json())
+        .then(data => {
+            const siteSelect = document.getElementById("site");
+            const widgetSelect = document.getElementById("widget");
+            const goalSelect = document.getElementById("goal");
+            const editSiteSelect = document.getElementById("editSite");
+            const editWidgetSelect = document.getElementById("editWidget");
+            const editGoalSelect = document.getElementById("editGoal");
+            const tbody = document.getElementById("script-table-body");
+
+            // Заполняем первоначальные селекты
+            data.sites.forEach(site => {
+                const option = document.createElement("option");
+                option.value = site.id;
+                option.textContent = site.name;
+                siteSelect.appendChild(option);
+
+                const editOption = option.cloneNode(true);
+                editSiteSelect.appendChild(editOption);
+            });
+
+            data.widgets.forEach(widget => {
+                const option = document.createElement("option");
+                option.value = widget.id;
+                option.textContent = widget.name;
+                widgetSelect.appendChild(option);
+
+                const editOption = option.cloneNode(true);
+                editWidgetSelect.appendChild(editOption);
+            });
+
+            data.goals.forEach(goal => {
+                const option = document.createElement("option");
+                option.value = goal.id;
+                option.textContent = goal.name;
+                goalSelect.appendChild(option);
+
+                const editOption = option.cloneNode(true);
+                editGoalSelect.appendChild(editOption);
+            });
+
+            // Заполняем таблицу
+            data.tableData.forEach((row) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.id}</td>
+                    <td data-site-id="${row.site_id}">${row.site}</td>
+                    <td data-widget-id="${row.widget_id}">${row.widget}</td>
+                    <td data-goal-id="${row.goal_id}">${row.goal}</td>
+                    <td>${row.dvalue}</td>
+                    <td><button type="button" class="edit-button" data-id="${row.id}">Изменить</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Обработчик кнопки "Изменить"
+            document.querySelectorAll('.edit-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const row = data.tableData.find(row => row.id === parseInt(id));
+                    if (row) {
+                        // Заполняем форму данными
+                        document.getElementById('editSite').value = row.site_id;
+                        document.getElementById('editWidget').value = row.widget_id;
+                        document.getElementById('editGoal').value = row.goal_id;
+                        document.getElementById('editDvalue').value = row.dvalue;
+
+                        // Устанавливаем id в скрытое поле
+                        document.getElementById('edit-hidden-id').value = id;
+
+                        // Показываем модальное окно
+                        document.getElementById('editModal').style.display = 'block';
+                    }
+                });
+            });
+        });
+});
+
+function closeModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+function saveChanges() {
+    const form = document.getElementById('edit-form');
+    const formData = new FormData(form);
+
+    // Убедитесь, что id правильно передается
+    const id = document.getElementById('edit-hidden-id').value;
+    console.log('ID to update:', id);
+
+    fetch("/update-script-param", {
+        method: "POST",
+        body: new URLSearchParams(formData)
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Ошибка сервера!');
+        }
+        return response.json();
+    }).then(() => {
+        closeModal();
+        window.location.reload(); // Перезагрузка страницы для обновления таблицы
+    }).catch(error => {
+        console.error('Ошибка при сохранении изменений:', error);
+    });
+}
+
+
+                document.getElementById("form").addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(e.target);
+                    fetch("/process", {
+                        method: "POST",
+                        body: new URLSearchParams(formData)
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                });
+
+            function calculateConversionRate(showingCount, sendingCount) {
+                if (showingCount === 0) {
+                    return 0;
+                }
+                return ((sendingCount / showingCount) * 100).toFixed(2);
+            }
+                //конверсия на вкладке аналитика 
+            function updateConversionRatesInTable() {
+                const tableBody = document.getElementById("analytics-table-body");
+                if (!tableBody) {
+                    console.error("Table body with id 'analytics-table-body' not found.");
+                    return;
+                }
+
+                const rows = tableBody.getElementsByTagName("tr");
+                if (rows.length === 0) {
+                    console.log("No rows found in the table body.");
+                    return;
+                }
+
+                // Словарь для хранения количества действий для каждого виджета
+                const widgetActions = {};
+
+                // Проходим по строкам таблицы и собираем данные
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName("td");
+                    if (cells.length < 6) {
+                        console.warn(`Row ${i} does not have enough cells.`);
+                        continue;
+                    }
+
+                    const siteName = cells[3].innerText;
+                    const widgetName = cells[5].innerText;
+                    const goalName = cells[4].innerText;
+
+                    const widgetKey = `${siteName}-${widgetName}`;
+
+                    if (!widgetActions[widgetKey]) {
+                        widgetActions[widgetKey] = { showing: 0, sending: 0 };
+                    }
+
+                    if (goalName === 'showingForm') {
+                        widgetActions[widgetKey].showing++;
+                    } else if (goalName === 'sendForm') {
+                        widgetActions[widgetKey].sending++;
+                    }
+                }
+
+                // Проходим по строкам таблицы и обновляем значения конверсии
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName("td");
+                    if (cells.length < 7) {
+                        console.warn(`Row ${i} does not have enough cells to update conversion rate.`);
+                        continue;
+                    }
+
+                    const siteName = cells[3].innerText;
+                    const widgetName = cells[5].innerText;
+
+                    const widgetKey = `${siteName}-${widgetName}`;
+
+                    if (!widgetActions[widgetKey]) {
+                        console.warn(`Widget key ${widgetKey} not found in widgetActions.`);
+                        continue;
+                    }
+
+                    const conversionRate = calculateConversionRate(widgetActions[widgetKey].showing, widgetActions[widgetKey].sending);
+                    const newCell = document.createElement("td");
+                    newCell.innerText = `${conversionRate}%`;
+                    cells[6].parentNode.insertBefore(newCell, cells[6].nextSibling);
+                }
+            }
+
+            // Вызов функции для обновления конверсии в таблице
+            updateConversionRatesInTable();
+        </script>
+</body>
+
+</html>

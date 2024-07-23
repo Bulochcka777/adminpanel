@@ -1,0 +1,94 @@
+﻿@import url('https://fonts.cdnfonts.com/css/exo-2');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#notification-widget {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#widget-skidka {
+    width: 1148px;
+    height: 147px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+}
+
+#group-section {
+    width: 844px;
+    height: 193.61px;
+    position: relative;
+    left: 100px;
+}
+
+#image-section img {
+    width: 144px;
+    height: 144px;
+    position: absolute;
+    transform: rotate(-26.94deg);
+}
+
+#zagolovok {
+    width: 289px;
+    height: 61px;
+    position: absolute;
+    top: 24px;
+    left: 194px;
+}
+
+.first-part {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 45.72px;
+    color: #FCA7A7;
+}
+
+.second-part {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.32px;
+    color: #000;
+}
+
+#text-postcriot {
+    width: 209px;
+    height: 24px;
+    position: absolute;
+    top: 97.5px;
+    left: 194px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 500;
+    font-size: 20.23px;
+    line-height: 24.27px;
+    color: #000;
+}
+
+#skidka-button {
+    width: 248px;
+    height: 38px;
+    position: absolute;
+    top: 55px;
+    left: 596px;
+    border-radius: 17px;
+    background: #FCA7A7;
+    border: none;
+    cursor: pointer;
+}
+
+#button-skidka {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13.72px;
+    color: #000;
+    text-transform: uppercase;
+}
