@@ -1,4 +1,4 @@
-version: '5.3'
+version: '3.8'
 
 services:
   app:
@@ -8,11 +8,13 @@ services:
     depends_on:
       - db
     environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: 123
-      DB_NAME: bdvidj
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=123
+      - DB_NAME=bdvidj
+      - RUNNING_IN_DOCKER=true
+      - APP_ADDRESS=yourdomain.com:8080
 
   db:
     image: postgres:13
@@ -21,9 +23,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123
-      POSTGRES_DB: bdvidj
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=bdvidj
 
 volumes:
   pgdata:

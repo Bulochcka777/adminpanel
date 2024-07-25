@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"net"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -26,6 +27,18 @@ func main() {
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
 	dbname := os.Getenv("DB_NAME")
+
+	// Проверка, запущено ли приложение в Docker
+	if os.Getenv("RUNNING_IN_DOCKER") == "true" {
+		host = "db"
+	} else {
+		host = "localhost"
+		port = "5432"
+		user = "postgres"
+		password = "123"
+		dbname = "bdvidj"
+	}
+
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
@@ -52,10 +65,35 @@ func main() {
 	router.Static("/static", "./static")
 	router.Static("/widgets", "./widgets")
 	handlers.InitTemplateHandler(tmpl, db)
+
+	// Вывод сообщения о том, по какому адресу можно открыть приложение
+	appAddress := os.Getenv("APP_ADDRESS")
+	if appAddress == "" {
+		appAddress = getLocalIP() + ":8080"
+	}
+	fmt.Printf("Сервер запущен на  https://%s\n", appAddress)
+
 	certFile := "server.crt"
 	keyFile := "server.key"
 	err = router.RunTLS(":8080", certFile, keyFile)
 	if err != nil {
 		log.Fatal("Failed to start server: ", err)
 	}
+}
+
+// getLocalIP возвращает внешний IP-адрес
+func getLocalIP() string {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return "localhost"
+	}
+	for _, address := range addrs {
+		// проверяем IP-адрес, чтобы он был не loopback
+		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				return ipnet.IP.String()
+			}
+		}
+	}
+	return "localhost"
 }

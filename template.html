@@ -921,15 +921,15 @@ function closeWidget() {
                 editSiteSelect.appendChild(editOption);
             });
 
-            data.widgets.forEach(widget => {
-                const option = document.createElement("option");
-                option.value = widget.id;
-                option.textContent = widget.name;
-                widgetSelect.appendChild(option);
+            // data.widgets.forEach(widget => {
+            //     const option = document.createElement("option");
+            //     option.value = widget.id;
+            //     option.textContent = widget.name;
+            //     widgetSelect.appendChild(option);
 
-                const editOption = option.cloneNode(true);
-                editWidgetSelect.appendChild(editOption);
-            });
+            //     const editOption = option.cloneNode(true);
+            //     editWidgetSelect.appendChild(editOption);
+            // });
 
             data.goals.forEach(goal => {
                 const option = document.createElement("option");
@@ -1024,6 +1024,8 @@ function saveChanges() {
                 }
                 return ((sendingCount / showingCount) * 100).toFixed(2);
             }
+
+
                 //конверсия на вкладке аналитика 
             function updateConversionRatesInTable() {
                 const tableBody = document.getElementById("analytics-table-body");
