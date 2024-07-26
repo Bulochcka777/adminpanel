@@ -1,6 +1,7 @@
 package route
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -50,15 +51,37 @@ func handlePostSite(c *gin.Context) {
 }
 
 // getSiteFromDB извлекает данные о сайте из базы данных
+// func getSiteFromDB(siteName string) (*Site, error) {
+// 	var site Site
+
+// 	// При необходимости экранируем или обрамляем siteName для SQL-запроса
+// 	safeSiteName := "'" + siteName + "'" // Возможно, вам нужно подстроить это под требования вашей базы данных
+
+//		err := db.QueryRow(`SELECT name, working, debugging FROM site WHERE name = `+safeSiteName).Scan(&site.Name, &site.Working, &site.Debugging)
+//		if err != nil {
+//			return nil, err
+//		}
+//		return &site, nil
+//	}
 func getSiteFromDB(siteName string) (*Site, error) {
 	var site Site
+	var siteID int
 
 	// При необходимости экранируем или обрамляем siteName для SQL-запроса
-	safeSiteName := "'" + siteName + "'" // Возможно, вам нужно подстроить это под требования вашей базы данных
+	safeSiteName := "'" + siteName + "'"
 
-	err := db.QueryRow(`SELECT name, working, debugging FROM site WHERE name = `+safeSiteName).Scan(&site.Name, &site.Working, &site.Debugging)
+	// Ищем domain в другой таблице
+	err := db.QueryRow(`SELECT site_id FROM alias WHERE domain = ` + safeSiteName).Scan(&siteID)
 	if err != nil {
 		return nil, err
 	}
+
+	// Используем site_id для получения информации о сайте
+	query := fmt.Sprintf("SELECT name, working, debugging FROM site WHERE id = %d", siteID)
+	err = db.QueryRow(query).Scan(&site.Name, &site.Working, &site.Debugging)
+	if err != nil {
+		return nil, err
+	}
+
 	return &site, nil
 }

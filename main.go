@@ -73,9 +73,15 @@ func main() {
 	}
 	fmt.Printf("Сервер запущен на  https://%s\n", appAddress)
 
-	certFile := "server.crt"
-	keyFile := "server.key"
-	err = router.RunTLS(":8080", certFile, keyFile)
+	// certFile := "server.crt"
+	// keyFile := "server.key"
+	// err = router.RunTLS(":8080", certFile, keyFile)
+	// if err != nil {
+	// 	log.Fatal("Failed to start server: ", err)
+	// }
+
+	// Запуск сервера на HTTP
+	err = router.Run(":8080")
 	if err != nil {
 		log.Fatal("Failed to start server: ", err)
 	}
