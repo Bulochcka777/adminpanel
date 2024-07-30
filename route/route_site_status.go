@@ -63,6 +63,7 @@ func handlePostSite(c *gin.Context) {
 //		}
 //		return &site, nil
 //	}
+
 func getSiteFromDB(siteName string) (*Site, error) {
 	var site Site
 	var siteID int

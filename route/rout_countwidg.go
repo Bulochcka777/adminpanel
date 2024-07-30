@@ -41,7 +41,7 @@ func handleGetLogCount(c *gin.Context) {
 	}
 
 	// Проверка наличия сайта
-	err = db.QueryRow("SELECT ID FROM Site WHERE Name = $1", json.Site_Name).Scan(&siteID)
+	err = db.QueryRow("SELECT ID_Site FROM Alias WHERE Domain = $1", json.Site_Name).Scan(&siteID)
 	if err == sql.ErrNoRows {
 		log.Printf("Site with Name %s not found", json.Site_Name)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Site not found"})

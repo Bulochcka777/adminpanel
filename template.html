@@ -143,20 +143,114 @@
             margin-right: 5px;
         }
 
-        /* .modal-content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ddd;
-            z-index: 1000;
-        }
-        .close {
-            float: right;
-            cursor: pointer;
-        } */
+        .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+    backdrop-filter: blur(5px); /* Эффект размытия */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+    backdrop-filter: blur(5px); /* Эффект размытия */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Дополнительные стили для формы внутри модального окна */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.modal-content select,
+.modal-content input[type="text"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
 
     </style>
     <script>
@@ -427,7 +521,7 @@ function closeWidget() {
                 <input type="text" name="dvalue" id="dvalue">
                 <br><br>
                 <input type="hidden" name="id" id="hidden-id">
-                <button type="button" onclick="saveChanges()">Сохранить изменения</button>
+                <button type="submit" onclick="saveChanges()">Сохранить изменения</button>
             </form>
             <table>
                 <thead>
@@ -447,7 +541,7 @@ function closeWidget() {
         </div>
     
         <!-- Модальное окно -->
-        <div id="editModal" style="display:none;">
+        <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <form id="edit-form" method="post">
@@ -774,13 +868,7 @@ function closeWidget() {
                 });
 
                 $.get('/get-widgets', function (widgets) {
-                    const widgetSelect = $('#widget');
                     const widgetFilter = $('#widget-filter');
-                    // для логов 
-                    widgetSelect.append(new Option('Все виджеты', 'all'));
-                    widgets.forEach(widget => {
-                        widgetSelect.append(new Option(widget.Name, widget.Name));
-                    });
                     //для аналитики
                     widgetFilter.append(new Option('Все виджеты', 'all'));
                     widgets.forEach(widget => {
@@ -921,15 +1009,15 @@ function closeWidget() {
                 editSiteSelect.appendChild(editOption);
             });
 
-            // data.widgets.forEach(widget => {
-            //     const option = document.createElement("option");
-            //     option.value = widget.id;
-            //     option.textContent = widget.name;
-            //     widgetSelect.appendChild(option);
+            data.widgets.forEach(widget => {
+                const option = document.createElement("option");
+                option.value = widget.id;
+                option.textContent = widget.name;
+                widgetSelect.appendChild(option);
 
-            //     const editOption = option.cloneNode(true);
-            //     editWidgetSelect.appendChild(editOption);
-            // });
+                const editOption = option.cloneNode(true);
+                editWidgetSelect.appendChild(editOption);
+            });
 
             data.goals.forEach(goal => {
                 const option = document.createElement("option");
