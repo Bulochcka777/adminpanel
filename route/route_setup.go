@@ -12,7 +12,7 @@ import (
 var db *sql.DB
 
 const (
-	host     = "localhost"
+	host     = "db"
 	port     = 5432
 	user     = "postgres"
 	password = "123"
