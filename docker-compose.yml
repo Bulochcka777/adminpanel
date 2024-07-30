@@ -14,10 +14,12 @@ services:
       - DB_PASSWORD=123
       - DB_NAME=bdvidj
       - RUNNING_IN_DOCKER=true
-      - APP_ADDRESS=yourdomain.com:8080
+      - APP_ADDRESS=Promo.qform.app:8080
+    expose:
+      - "8080"
 
   db:
-    image: postgres:13
+    image: postgres:16.2
     ports:
       - "5432:5432"
     volumes:
@@ -26,6 +28,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
       - POSTGRES_DB=bdvidj
-
+    expose:
+      - "5432"
 volumes:
   pgdata:
